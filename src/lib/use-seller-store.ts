@@ -2,7 +2,7 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 import * as store from "./seller-store";
-import type { Order } from "./types";
+import type { Enquiry, Order, Product } from "./types";
 
 export function useSelectedSellerId(): [string, (sellerId: string) => void] {
   const sellerId = useSyncExternalStore(
@@ -30,6 +30,18 @@ export function useSellerEnquiries(sellerId: string) {
 export function useSellerCatalog(sellerId: string) {
   const getSnapshot = useCallback(() => store.getCatalogSnapshot(sellerId), [sellerId]);
   return useSyncExternalStore(store.subscribe, getSnapshot, store.getCatalogServerSnapshot);
+}
+
+export function useAllOrders(): Order[] {
+  return useSyncExternalStore(store.subscribe, store.getOrdersSnapshot, store.getOrdersServerSnapshot);
+}
+
+export function useAllEnquiries(): Enquiry[] {
+  return useSyncExternalStore(store.subscribe, store.getEnquiriesSnapshot, store.getEnquiriesServerSnapshot);
+}
+
+export function useAllCatalogs(): Product[] {
+  return useSyncExternalStore(store.subscribe, store.getAllCatalogsSnapshot, store.getCatalogServerSnapshot);
 }
 
 export const {

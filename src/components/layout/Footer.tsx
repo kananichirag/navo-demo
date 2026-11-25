@@ -40,6 +40,9 @@ export function Footer() {
           <p className="mt-3 text-sm text-[var(--color-ink-muted)]">
             Built as a product demo — no real payments, accounts, or messages are sent.
           </p>
+          <Link href="/admin" className="mt-3 inline-block text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-primary)]">
+            Platform admin
+          </Link>
         </div>
       </div>
 

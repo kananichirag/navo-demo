@@ -62,6 +62,13 @@ function ensureCatalogSeeded(sellerId: string) {
   catalogs = { ...catalogs, [sellerId]: getProductsBySeller(sellerId).map((product) => ({ ...product })) };
 }
 
+let allProductsCache: Product[] = EMPTY_PRODUCTS;
+let allProductsCacheKey: Record<string, Product[]> | null = null;
+
+function ensureAllCatalogsSeeded() {
+  for (const seller of sellers) ensureCatalogSeeded(seller.id);
+}
+
 export function subscribe(listener: Listener): () => void {
   listeners.add(listener);
   return () => listeners.delete(listener);
@@ -93,6 +100,16 @@ export function getCatalogSnapshot(sellerId: string): Product[] {
 
 export function getCatalogServerSnapshot(): Product[] {
   return EMPTY_PRODUCTS;
+}
+
+export function getAllCatalogsSnapshot(): Product[] {
+  ensureHydrated();
+  ensureAllCatalogsSeeded();
+  if (allProductsCacheKey !== catalogs) {
+    allProductsCache = Object.values(catalogs).flat();
+    allProductsCacheKey = catalogs;
+  }
+  return allProductsCache;
 }
 
 export function getSelectedSellerIdSnapshot(): string {
