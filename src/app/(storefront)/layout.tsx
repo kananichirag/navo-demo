@@ -4,7 +4,7 @@ import { CartProvider } from "@/lib/cart-context";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyCartBar } from "@/components/layout/StickyCartBar";
-import "./globals.css";
+import "../globals.css";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
