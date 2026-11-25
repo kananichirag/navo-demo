@@ -21,7 +21,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--color-ink)] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#14161c] px-4">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-sm rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6"
@@ -75,7 +75,7 @@ export default function AdminLoginPage() {
 
         <button
           type="submit"
-          className="mt-4 w-full rounded-full bg-[var(--color-ink)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-black"
+          className="mt-4 w-full rounded-full bg-[#14161c] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-black"
         >
           Sign in
         </button>

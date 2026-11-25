@@ -74,7 +74,9 @@ export interface CartLine {
   quantity: number;
 }
 
-export type OrderStatus = "pending" | "dispatched";
+export type OrderStatus = "pending" | "dispatched" | "out-for-delivery" | "delivered";
+
+export type PayoutStatus = "unpaid" | "paid";
 
 export interface OrderLine {
   productId: string;
@@ -94,6 +96,7 @@ export interface Order {
   buyerAddress: string;
   placedAt: string;
   status: OrderStatus;
+  payoutStatus: PayoutStatus;
 }
 
 export type EnquiryStatus = "open" | "responded";
@@ -114,3 +117,14 @@ export type NewProductInput = Pick<
   compareAtPrice?: number;
   tags: Product["tags"];
 };
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  phone: string;
+  email?: string;
+  joinedAt: string;
+}
+
+export type NewTeamMemberInput = Pick<TeamMember, "name" | "role" | "phone" | "email">;

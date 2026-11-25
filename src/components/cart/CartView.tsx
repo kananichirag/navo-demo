@@ -103,6 +103,7 @@ export function CartView() {
         buyerAddress,
         placedAt,
         status: "pending",
+        payoutStatus: "unpaid",
       };
       recordOrder(order);
     });

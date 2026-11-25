@@ -71,9 +71,9 @@ export default function SellerOverviewPage() {
             {activity.map((item) => (
               <li
                 key={`${item.type}-${item.id}`}
-                className="flex items-center justify-between gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3"
+                className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3"
               >
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-medium text-[var(--color-ink)]">{item.label}</p>
                   <p className="text-xs text-[var(--color-ink-muted)]">{item.detail}</p>
                 </div>

@@ -1,4 +1,4 @@
-import type { Enquiry, Order } from "./types";
+import type { Enquiry, Order, TeamMember } from "./types";
 
 const HOUR = 60 * 60 * 1000;
 const now = Date.now();
@@ -17,6 +17,7 @@ export const SEED_ORDERS: Order[] = [
     buyerAddress: "14 Lal Darwaza Market, Surat, Gujarat 395003",
     placedAt: hoursAgo(5),
     status: "pending",
+    payoutStatus: "unpaid",
   },
   {
     id: "BA-471820-s1",
@@ -30,7 +31,8 @@ export const SEED_ORDERS: Order[] = [
     buyerPhone: "9823456710",
     buyerAddress: "22 Gandhi Road, Ahmedabad, Gujarat 380001",
     placedAt: hoursAgo(30),
-    status: "dispatched",
+    status: "out-for-delivery",
+    payoutStatus: "unpaid",
   },
   {
     id: "BA-490244-s6",
@@ -44,6 +46,7 @@ export const SEED_ORDERS: Order[] = [
     buyerAddress: "8 Station Road, Jodhpur, Rajasthan 342001",
     placedAt: hoursAgo(2),
     status: "pending",
+    payoutStatus: "unpaid",
   },
   {
     id: "BA-465310-s6",
@@ -56,7 +59,8 @@ export const SEED_ORDERS: Order[] = [
     buyerPhone: "9845123067",
     buyerAddress: "56 Chandpole Bazaar, Jaipur, Rajasthan 302001",
     placedAt: hoursAgo(50),
-    status: "dispatched",
+    status: "delivered",
+    payoutStatus: "paid",
   },
   {
     id: "BA-499102-s7",
@@ -69,7 +73,8 @@ export const SEED_ORDERS: Order[] = [
     buyerPhone: "9034567812",
     buyerAddress: "19 New Market, Kolkata, West Bengal 700087",
     placedAt: hoursAgo(8),
-    status: "pending",
+    status: "dispatched",
+    payoutStatus: "unpaid",
   },
   {
     id: "BA-452871-s7",
@@ -82,7 +87,8 @@ export const SEED_ORDERS: Order[] = [
     buyerPhone: "9798765432",
     buyerAddress: "3 Gariahat Road, Kolkata, West Bengal 700019",
     placedAt: hoursAgo(70),
-    status: "dispatched",
+    status: "delivered",
+    payoutStatus: "unpaid",
   },
 ];
 
@@ -93,4 +99,11 @@ export const SEED_ENQUIRIES: Enquiry[] = [
   { id: "enq-seed-4", sellerId: "s6", productId: "p12", productName: "Dhanekhali Cotton Saree — Market Check", createdAt: hoursAgo(40), status: "responded" },
   { id: "enq-seed-5", sellerId: "s7", productId: "p7", productName: "Banarasi Silk Saree — Royal Menagerie", createdAt: hoursAgo(6), status: "open" },
   { id: "enq-seed-6", sellerId: "s7", productId: "p3", productName: "Kanjivaram Saree — Heritage Gold", createdAt: hoursAgo(45), status: "responded" },
+];
+
+export const SEED_TEAM_MEMBERS: TeamMember[] = [
+  { id: "team-seed-1", name: "Arjun Mehta", role: "Delivery Manager", phone: "9900112233", email: "arjun@ba-enterprises.com", joinedAt: hoursAgo(24 * 200) },
+  { id: "team-seed-2", name: "Priya Nair", role: "Operations", phone: "9900223344", email: "priya@ba-enterprises.com", joinedAt: hoursAgo(24 * 160) },
+  { id: "team-seed-3", name: "Rohit Sharma", role: "Customer Support", phone: "9900334455", email: "rohit@ba-enterprises.com", joinedAt: hoursAgo(24 * 90) },
+  { id: "team-seed-4", name: "Fatima Shaikh", role: "Finance", phone: "9900445566", email: "fatima@ba-enterprises.com", joinedAt: hoursAgo(24 * 60) },
 ];

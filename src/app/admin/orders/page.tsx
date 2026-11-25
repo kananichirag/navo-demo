@@ -2,6 +2,7 @@
 
 import { getSellerById } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
+import { ORDER_STATUS_META, PAYOUT_STATUS_META } from "@/lib/order-status";
 import { setEnquiryStatus, setOrderStatus, useAllEnquiries, useAllOrders } from "@/lib/use-seller-store";
 import { Badge } from "@/components/ui/Badge";
 
@@ -29,9 +30,12 @@ export default function AdminOrdersPage() {
                       {seller?.name ?? "Seller"} · {formatDate(order.placedAt)}
                     </p>
                   </div>
-                  <Badge tone={order.status === "dispatched" ? "success" : "accent"}>
-                    {order.status === "dispatched" ? "Dispatched" : "Pending"}
-                  </Badge>
+                  <div className="flex gap-1.5">
+                    <Badge tone={ORDER_STATUS_META[order.status].tone}>{ORDER_STATUS_META[order.status].label}</Badge>
+                    <Badge tone={PAYOUT_STATUS_META[order.payoutStatus].tone}>
+                      Payout: {PAYOUT_STATUS_META[order.payoutStatus].label}
+                    </Badge>
+                  </div>
                 </div>
 
                 <div className="mt-3 rounded-xl bg-[var(--color-surface-sunken)] p-3 text-sm text-[var(--color-ink-muted)]">
@@ -42,16 +46,16 @@ export default function AdminOrdersPage() {
 
                 <ul className="mt-3 space-y-1 text-sm text-[var(--color-ink)]">
                   {order.lines.map((line) => (
-                    <li key={`${line.productId}-${line.variantLabel}`} className="flex justify-between">
+                    <li key={`${line.productId}-${line.variantLabel}`} className="flex flex-wrap justify-between gap-x-3">
                       <span>
                         {line.productName} ({line.variantLabel}) × {line.quantity}
                       </span>
-                      <span>{formatPrice(line.priceAtOrder * line.quantity)}</span>
+                      <span className="shrink-0">{formatPrice(line.priceAtOrder * line.quantity)}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-3 flex items-center justify-between border-t border-[var(--color-border)] pt-3">
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--color-border)] pt-3">
                   <span className="font-semibold text-[var(--color-ink)]">{formatPrice(order.subtotal)}</span>
                   {order.status === "pending" && (
                     <button
