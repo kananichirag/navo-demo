@@ -28,10 +28,14 @@ const STOCK_LABEL: Record<Product["stock"], { label: string; tone: "success" | "
 
 export function ProductDetailInteractive({ product, seller, categoryIcon }: Props) {
   const [variantIndex, setVariantIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(product.moq);
   const [justAdded, setJustAdded] = useState(false);
   const [enquirySent, setEnquirySent] = useState(false);
   const { addLine } = useCart();
+
+  const images = product.images ?? [];
+  const activeImage = images[imageIndex] ?? images[0];
 
   const variant = product.variants[variantIndex];
   const discount = discountPercent(product.price, product.compareAtPrice);
@@ -57,17 +61,50 @@ export function ProductDetailInteractive({ product, seller, categoryIcon }: Prop
 
   return (
     <div className="grid gap-10 lg:grid-cols-2">
-      <div>
-        {product.image ? (
-          <div className="relative aspect-square overflow-hidden rounded-3xl">
-            <Image
-              src={product.image.src}
-              alt={product.image.alt}
-              fill
-              sizes="(min-width: 1024px) 560px, 100vw"
-              className="object-cover"
-              priority
-            />
+      <div className="min-w-0">
+        {activeImage ? (
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+            <div
+              className={clsx(
+                "order-2 flex gap-2 overflow-x-auto sm:order-1 sm:w-20 sm:shrink-0 sm:flex-col sm:overflow-visible",
+                images.length <= 1 && "hidden"
+              )}
+            >
+              {images.map((img, index) => (
+                <button
+                  key={img.src}
+                  type="button"
+                  onClick={() => setImageIndex(index)}
+                  aria-label={`View image ${index + 1} of ${images.length}`}
+                  aria-current={index === imageIndex}
+                  className={clsx(
+                    "relative aspect-square w-16 shrink-0 overflow-hidden rounded-xl border-2 transition sm:w-full",
+                    index === imageIndex
+                      ? "border-[var(--color-primary)]"
+                      : "border-transparent opacity-70 hover:opacity-100"
+                  )}
+                >
+                  <Image src={img.src} alt="" fill sizes="80px" className="object-cover" />
+                </button>
+              ))}
+            </div>
+
+            <div className="relative order-1 aspect-[4/5] flex-1 overflow-hidden rounded-3xl bg-[var(--color-surface-sunken)] sm:order-2">
+              <Image
+                key={activeImage.src}
+                src={activeImage.src}
+                alt={activeImage.alt}
+                fill
+                sizes="(min-width: 1024px) 560px, 100vw"
+                className="object-cover"
+                priority
+              />
+              {product.tags.includes("Bestseller") && (
+                <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-[var(--color-gold)] px-3 py-1 text-xs font-semibold text-white shadow-sm">
+                  Bestseller
+                </span>
+              )}
+            </div>
           </div>
         ) : (
           <div
@@ -77,12 +114,16 @@ export function ProductDetailInteractive({ product, seller, categoryIcon }: Prop
             {renderCategoryIcon(categoryIcon, "h-16 w-16 text-white/70")}
           </div>
         )}
-        {product.image && (
+        {activeImage?.credit && (
           <p className="mt-1.5 text-right text-xs text-[var(--color-ink-muted)]">
             Photo:{" "}
-            <a href={product.image.creditUrl} className="underline hover:text-[var(--color-primary)]" target="_blank" rel="noopener noreferrer">
-              {product.image.credit}
-            </a>
+            {activeImage.creditUrl ? (
+              <a href={activeImage.creditUrl} className="underline hover:text-[var(--color-primary)]" target="_blank" rel="noopener noreferrer">
+                {activeImage.credit}
+              </a>
+            ) : (
+              activeImage.credit
+            )}
           </p>
         )}
         <div className="mt-3 flex gap-2">
@@ -103,7 +144,7 @@ export function ProductDetailInteractive({ product, seller, categoryIcon }: Prop
         </div>
       </div>
 
-      <div>
+      <div className="min-w-0">
         <div className="flex flex-wrap gap-1.5">
           {product.tags.map((tag) => (
             <Badge key={tag} tone={tagTone(tag)}>

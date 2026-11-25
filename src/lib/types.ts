@@ -54,8 +54,8 @@ export interface Product {
   tags: Array<"New" | "Trending" | "Bestseller" | "Festive">;
   swatch: SwatchKey;
   pattern: "diagonal" | "dot" | "grid" | "wave";
-  /** Real product photo, shown instead of the generated swatch art when set. */
-  image?: ProductImage;
+  /** Real product photos, shown instead of the generated swatch art when set. First image is the default/listing thumbnail. */
+  images?: ProductImage[];
   variants: ProductVariant[];
   description: string;
   highlights: string[];

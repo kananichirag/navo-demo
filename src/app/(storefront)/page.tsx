@@ -1,5 +1,5 @@
 import { Hero } from "@/components/home/Hero";
-import { CategoryGrid } from "@/components/home/CategoryGrid";
+import { FeaturedLookbook } from "@/components/home/FeaturedLookbook";
 import { ProductRail } from "@/components/home/ProductRail";
 import { SellerRail } from "@/components/home/SellerRail";
 import { TrustStrip } from "@/components/home/TrustStrip";
@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <CategoryGrid />
+      <FeaturedLookbook />
       <ProductRail title="Trending this week" subtitle="What retail buyers are enquiring about most" products={trending} seeAllHref="/products" />
       <SellerRail title="Top sellers" subtitle="Highly rated, fast-responding wholesale sellers" sellers={topSellers} />
       <ProductRail title="New arrivals" subtitle="Fresh catalog drops from this week" products={newArrivals} seeAllHref="/products" />

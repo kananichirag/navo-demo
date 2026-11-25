@@ -29,14 +29,14 @@ export default async function ProductDetailPage(props: PageProps<"/products/[slu
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
-      <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-sm text-[var(--color-ink-muted)]">
-        <Link href="/" className="hover:text-[var(--color-primary)]">Home</Link>
-        <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
-        <Link href={`/products?category=${category.id}`} className="hover:text-[var(--color-primary)]">
+      <nav aria-label="Breadcrumb" className="mb-6 flex min-w-0 items-center gap-1.5 text-sm text-[var(--color-ink-muted)]">
+        <Link href="/" className="shrink-0 hover:text-[var(--color-primary)]">Home</Link>
+        <ChevronRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+        <Link href={`/products?category=${category.id}`} className="shrink-0 hover:text-[var(--color-primary)]">
           {category.name}
         </Link>
-        <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
-        <span className="line-clamp-1 text-[var(--color-ink)]">{product.name}</span>
+        <ChevronRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+        <span className="line-clamp-1 min-w-0 text-[var(--color-ink)]">{product.name}</span>
       </nav>
 
       <ProductDetailInteractive product={product} seller={seller} categoryIcon={category.icon} />

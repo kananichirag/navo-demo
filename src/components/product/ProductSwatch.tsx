@@ -7,18 +7,19 @@ import { swatches } from "@/lib/swatches";
 import type { Product } from "@/lib/types";
 
 type Props = {
-  product: Pick<Product, "swatch" | "pattern" | "categoryId" | "image">;
+  product: Pick<Product, "swatch" | "pattern" | "categoryId" | "images">;
   className?: string;
   sizes?: string;
 };
 
 export function ProductSwatch({ product, className, sizes = "(min-width: 640px) 256px, 50vw" }: Props) {
-  if (product.image) {
+  const cover = product.images?.[0];
+  if (cover) {
     return (
       <div className={clsx("relative aspect-[4/5] overflow-hidden rounded-2xl", className)}>
         <Image
-          src={product.image.src}
-          alt={product.image.alt}
+          src={cover.src}
+          alt={cover.alt}
           fill
           sizes={sizes}
           className="object-cover"

@@ -26,14 +26,14 @@ const ITEMS = [
 export function TrustStrip() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
-      <div className="grid gap-4 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-4">
+      <div className="grid divide-y divide-[var(--color-border)] rounded-3xl border border-[var(--color-border)] bg-[linear-gradient(135deg,var(--color-surface),var(--color-surface-sunken))] p-6 sm:grid-cols-2 sm:divide-y-0 sm:divide-x sm:p-8 lg:grid-cols-4">
         {ITEMS.map((item) => (
-          <div key={item.title} className="flex flex-col gap-2">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-primary-tint)] text-[var(--color-primary-dark)]">
+          <div key={item.title} className="flex flex-col gap-2.5 py-5 first:pt-0 sm:px-6 sm:py-0 sm:first:pl-0 sm:last:pr-0">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-gold-tint)] text-[var(--color-gold)]">
               <item.icon className="h-5 w-5" aria-hidden="true" />
             </span>
             <p className="text-sm font-semibold text-[var(--color-ink)]">{item.title}</p>
-            <p className="text-sm text-[var(--color-ink-muted)]">{item.description}</p>
+            <p className="text-sm leading-relaxed text-[var(--color-ink-muted)]">{item.description}</p>
           </div>
         ))}
       </div>
